@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💘 Valentine Check 💘</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffe6eb, #fff0f5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    z-index: 2;
+  }
+
+  h1 {
+    color: #d6336c;
+    font-size: 1.9rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin: 12px 0;
+  }
+
+  .warning {
+    font-size: 0.9rem;
+    color: #888;
+  }
+
+  .buttons {
+    margin-top: 25px;
+    position: relative;
+    height: 130px;
+  }
+
+  button {
+    padding: 12px 26px;
+    font-size: 1rem;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+  }
+
+  #yesBtn {
+    background: #d6336c;
+    color: white;
+  }
+
+  #noBtn {
+    background: #ddd;
+    position: absolute;
+    left: 55%;
+    top: 60%;
+  }
+
+  #result {
+    display: none;
+    margin-top: 20px;
+    font-size: 1.2rem;
+  }
+
+  #finalMessage {
+    display: none;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  .heart {
+    position: absolute;
+    color: #ff4d6d;
+    font-size: 24px;
+    animation: floatUp 3s linear forwards;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-600px);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Ponnu 😌</h1>
+
+  <p><strong>Will you be my Valentine?</strong></p>
+  <p class="warning">⚠️ Choose wisely</p>
+  <p class="warning">(The “No” button is suspicious 😏)</p>
+
+  <div class="buttons">
+    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="noBtn">No 🙄</button>
+  </div>
+
+  <div id="result">
+    <p><strong>Good choice 😌</strong></p>
+    <p>I knew you’d choose me, Ponnu ❤️</p>
+    <div id="finalMessage">Happy Valentine’s Day, Ponnu 🌹</div>
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * 220;
+  const y = Math.random() * 100;
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+function yesClicked() {
+  document.querySelector(".buttons").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("finalMessage").style.display = "block";
+
+  // Phone vibration (if supported)
+  if (navigator.vibrate) {
+    navigator.vibrate([200, 100, 200]);
+  }
+
+  // Hearts popping
+  for (let i = 0; i < 20; i++) {
+    createHeart();
+  }
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.bottom = "0px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 3000);
+}
+</script>
+
+</body>
+</html>
